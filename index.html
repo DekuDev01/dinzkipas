@@ -363,10 +363,10 @@
 
   <div class="status-row">
     <div class="stat-card"><div class="dot blink"></div><div><span class="stat-text">STATUS: ONLINE</span></div></div>
-    <div class="stat-card"><div class="dot pink"></div><div><span class="stat-text">BERHASIL DOWNLOAD: 8.512</span></div></div>
+    <div class="stat-card"><div class="dot pink"></div><div><span class="stat-text">BERHASIL DOWNLOAD: 60.512</span></div></div>
   </div>
 
-  <!-- ========== IKLAN BANNER 1 (HANYA 1 BANNER) ========== -->
+  <!-- ========== IKLAN BANNER 1 ========== -->
   <div class="ad-banner-container">
     <div class="ad-label">Advertisement</div>
     <div id="banner-placeholder">
@@ -396,15 +396,15 @@
     </div>
     <div class="download-card" data-link="PANEL">
       <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
-      <div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">premium panel</div></div>
+      <div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">change diamond and gold</div></div>
     </div>
     <div class="download-card" data-link="VERIF">
       <div class="card-icon"><i class="fas fa-check-circle"></i></div>
-      <div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">bantuan</div></div>
+      <div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">verify your ffkipas account uid</div></div>
     </div>
     <div class="download-card" data-link="TOPUP">
       <div class="card-icon"><i class="fas fa-gem"></i></div>
-      <div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">generator</div></div>
+      <div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">coming soon</div></div>
     </div>
     <div class="download-card" data-link="DISCORD">
       <div class="card-icon"><i class="fab fa-discord"></i></div>
@@ -415,20 +415,20 @@
   <footer></footer>
 </div>
 
-<!-- SCRIPT IKLAN ADSTERRA (DARI ANDA) -->
+<!-- SCRIPT IKLAN ADSTERRA -->
 <script src="https://molecularshindy.com/73/62/a3/7362a3023c5cd755ced39b4962cebe50.js"></script>
 <script async="async" data-cfasync="false" src="https://molecularshindy.com/90fd448db13fd25a49206558532de405/invoke.js"></script>
 <div id="container-90fd448db13fd25a49206558532de405" style="display:none;"></div>
 <script src="https://molecularshindy.com/91/ae/48/91ae487b76c5ee2e9931b42095a1e3d6.js"></script>
 
 <script>
-  // ========== KONFIGURASI LINK (GANTI DI ACODE) ==========
+  // ========== KONFIGURASI LINK YANG DIMINTA ==========
   const LINKS = {
     SALURAN: "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01",
     DOWNLOAD1: "https://ffkipasdownload.netlify.app/",
     PANEL: "https://ffkipas.my.id/panel/",
-    VERIF: "https://ffkipas.my.id/verifyuid/",
-    TOPUP: "https://codashop.clm",
+    VERIF: "https://ffkipas.my.id/verifyuid",
+    TOPUP: "#",
     DISCORD: "https://discord.gg/CemWvnBwa",
     VIDEO: "https://youtu.be/RhNij-_O2TM?si=DGSitvBQwrRsdtjl"
   };
@@ -441,11 +441,19 @@
     "https://molecularshindy.com/428cd8c9cc9192522acef3d19588e732"
   ];
 
-  // ========== VARIABEL ==========
-  let skipAdCount = 0;      // Counter untuk tombol LEWATI IKLAN (butuh 2x)
-  let downloadAdCount = 0;  // Counter untuk tombol download (butuh 3x)
-  let pendingUrl = null;     // URL yang akan dibuka setelah iklan
-  let pendingAction = null;   // Nama action untuk notifikasi
+  // ========== VARIABEL UNTUK SETIAP TOMBOL (PER-TOMBOL) ==========
+  // Menyimpan counter iklan untuk setiap aksi secara terpisah
+  let adCounters = {
+    SALURAN: 0,
+    DOWNLOAD1: 0,
+    PANEL: 0,
+    VERIF: 0,
+    TOPUP: 0,
+    DISCORD: 0,
+    VIDEO: 0
+  };
+  
+  let skipAdCount = 0; // Untuk masuk ke halaman utama (2x iklan)
 
   // Elemen DOM
   const popupOverlay = document.getElementById('popupOverlay');
@@ -480,58 +488,87 @@
     return randomAdUrl;
   }
 
-  // ========== FUNGSI UNTUK LEWATI IKLAN (BUTUH 2x IKLAN) ==========
+  // ========== FUNGSI UNTUK LEWATI IKLAN MASUK WEBSITE (2x iklan) ==========
   function processSkipAds() {
     if (skipAdCount >= 2) {
-      // Sudah 2x iklan, boleh masuk halaman utama
       showToast("✅ Akses diberikan! Memasuki halaman utama...", false);
       popupOverlay.style.display = 'none';
       mainContent.style.display = 'block';
       skipAdCount = 0;
-      downloadAdCount = 0;
-      showToast("💡 Setiap tombol download perlu 3x iklan", false);
-      setTimeout(() => {
-        const notif = document.getElementById('toastNotif');
-        notif.classList.remove('show');
-      }, 3000);
+      // Reset semua counter per tombol saat masuk halaman utama
+      for (let key in adCounters) {
+        adCounters[key] = 0;
+      }
+      showToast("💡 Setiap tombol perlu 3x iklan", false);
     } else {
-      // Buka iklan
       openAd();
       skipAdCount++;
       showToast(`🎯 Iklan ke-${skipAdCount} dari 2 untuk masuk website`, false);
     }
   }
 
-  // ========== FUNGSI UNTUK DOWNLOAD / TOMBOL LAIN (BUTUH 3x IKLAN) ==========
-  function processDownloadWithAds(event, targetUrl, actionName) {
+  // ========== FUNGSI UNTUK SETIAP TOMBOL (3x iklan PER TOMBOL) ==========
+  function processButtonClick(event, targetUrl, actionName) {
     event.preventDefault();
     event.stopPropagation();
     
-    if (!targetUrl || targetUrl === "#") {
-      showToast("⚠️ Link sedang dalam perbaikan!", true);
+    // Cek apakah link valid (kecuali TOPUP yang sengaja "#")
+    if (actionName !== "FAKE TOP UP FF" && (!targetUrl || targetUrl === "#")) {
+      showToast(`⚠️ Link untuk ${actionName} sedang dalam perbaikan!`, true);
       return;
     }
     
-    if (downloadAdCount >= 3) {
-      // Sudah 3x iklan, buka link tujuan
+    // Untuk TOPUP yang linknya "#", beri notifikasi khusus
+    if (actionName === "FAKE TOP UP FF" && targetUrl === "#") {
+      showToast(`⚠️ Fitur FAKE TOP UP sedang dalam pengembangan!`, true);
+      return;
+    }
+    
+    let counter = adCounters[actionName.toUpperCase().replace(/ /g, '_')];
+    if (counter === undefined) {
+      // Fallback mapping
+      const mapping = {
+        'SALURAN': 'SALURAN',
+        'FFKIPAS OB 53': 'DOWNLOAD1',
+        'PANEL FFKIPAS': 'PANEL',
+        'VERIF MANUAL': 'VERIF',
+        'FAKE TOP UP FF': 'TOPUP',
+        'DISCORD': 'DISCORD',
+        'VIDEO': 'VIDEO'
+      };
+      const key = mapping[actionName] || actionName.toUpperCase().replace(/[^A-Z]/g, '_');
+      counter = adCounters[key] || 0;
+    }
+    
+    if (counter >= 3) {
+      // Sudah 3x iklan untuk tombol ini, buka link tujuan
       showToast(`✅ Akses diberikan! Membuka ${actionName}`, false);
       window.open(targetUrl, '_blank');
-      downloadAdCount = 0;
+      // Reset counter tombol ini setelah berhasil (opsional)
+      const key = getCounterKey(actionName);
+      if (key) adCounters[key] = 0;
     } else {
       // Buka iklan
       openAd();
-      downloadAdCount++;
-      showToast(`🎯 Iklan ke-${downloadAdCount} dari 3 untuk ${actionName}`, false);
-      
-      // Simpan pending jika belum selesai
-      if (downloadAdCount >= 3) {
-        setTimeout(() => {
-          showToast(`✅ Bebas! Membuka ${actionName}`, false);
-          window.open(targetUrl, '_blank');
-          downloadAdCount = 0;
-        }, 1000);
-      }
+      const newCounter = counter + 1;
+      const key = getCounterKey(actionName);
+      if (key) adCounters[key] = newCounter;
+      showToast(`🎯 Iklan ke-${newCounter} dari 3 untuk ${actionName}`, false);
     }
+  }
+  
+  // Helper untuk mendapatkan kunci counter berdasarkan nama aksi
+  function getCounterKey(actionName) {
+    const mapping = {
+      'SALURAN': 'SALURAN',
+      'FFKIPAS OB 53': 'DOWNLOAD1',
+      'PANEL FFKIPAS': 'PANEL',
+      'VERIF MANUAL': 'VERIF',
+      'FAKE TOP UP FF': 'TOPUP',
+      'DISCORD': 'DISCORD',
+      'VIDEO': 'VIDEO'
+    };
+    return mapping[actionName];
   }
 
   // ========== EVENT LISTENER ==========
@@ -545,7 +582,7 @@
     });
   }
   
-  // Tombol X close popup (sama seperti lewati iklan)
+  // Tombol X close popup
   const closePopupBtn = document.getElementById('closePopupBtn');
   if (closePopupBtn) {
     closePopupBtn.addEventListener('click', () => {
@@ -557,7 +594,7 @@
   const saluranPopupBtn = document.getElementById('saluranPopupBtn');
   if (saluranPopupBtn) {
     saluranPopupBtn.addEventListener('click', (e) => {
-      processDownloadWithAds(e, LINKS.SALURAN, "SALURAN");
+      processButtonClick(e, LINKS.SALURAN, "SALURAN");
     });
   }
   
@@ -565,21 +602,21 @@
   const headerSaluran = document.getElementById('headerSaluranBtn');
   if (headerSaluran) {
     headerSaluran.addEventListener('click', (e) => {
-      processDownloadWithAds(e, LINKS.SALURAN, "SALURAN");
+      processButtonClick(e, LINKS.SALURAN, "SALURAN");
     });
   }
   
-  // Forward dan Copy link (tanpa iklan, biar user tidak kesal)
+  // Forward dan Copy link (tanpa iklan)
   const forwardPopup = document.getElementById('forwardBtnPopup');
   const copyPopup = document.getElementById('copyLinkPopup');
   if (forwardPopup) {
     forwardPopup.addEventListener('click', () => {
-      alert("📢 Bagikan channel ini: https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01");
+      alert("📢 Bagikan channel ini: " + LINKS.SALURAN);
     });
   }
   if (copyPopup) {
     copyPopup.addEventListener('click', () => {
-      navigator.clipboard.writeText("https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01").then(() => {
+      navigator.clipboard.writeText(LINKS.SALURAN).then(() => {
         alert("✅ Link saluran disalin!");
       }).catch(() => {
         alert("⚠️ Gagal menyalin");
@@ -604,7 +641,7 @@
         default: url = null;
       }
       
-      processDownloadWithAds(e, url, title);
+      processButtonClick(e, url, title);
     });
   });
   
@@ -612,7 +649,7 @@
   const videoArea = document.getElementById('videoPreviewClick');
   if (videoArea) {
     videoArea.addEventListener('click', (e) => {
-      processDownloadWithAds(e, LINKS.VIDEO, "VIDEO");
+      processButtonClick(e, LINKS.VIDEO, "VIDEO");
     });
   }
   
@@ -620,11 +657,11 @@
   const menuBtn = document.getElementById('menuIconBtn');
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap download → 3x iklan\n• Dukung server dengan klik iklan!");
+      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap tombol → 3x iklan (per tombol)\n• Dukung server dengan klik iklan!");
     });
   }
   
-  // Gambar dinamis (bisa ganti URL)
+  // Gambar dinamis
   document.getElementById('profileImg').src = "https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg";
   document.getElementById('logoImg').src = "https://i.postimg.cc/qM1BHbWd/vdxxzin-e.jpg";
   document.getElementById('videoThumb').src = "https://i.postimg.cc/KjXkLqxC/Tak-berjudul11-20260418144552.jpg";
@@ -640,17 +677,19 @@
     });
   });
   
-  // Inisialisasi: popup tampil, halaman utama tersembunyi
+  // Inisialisasi
   popupOverlay.style.display = 'flex';
   mainContent.style.display = 'none';
   skipAdCount = 0;
-  downloadAdCount = 0;
+  for (let key in adCounters) {
+    adCounters[key] = 0;
+  }
   
   console.log("✅ WEBSITE SIAP!");
   console.log("📊 Sistem iklan aktif:");
-  console.log("   - LEWATI IKLAN → 2x iklan");
-  console.log("   - Setiap tombol download → 3x iklan");
-  console.log("💰 Selamat mencari cuan dengan CPM tinggi!");
+  console.log("   - LEWATI IKLAN → 2x iklan untuk masuk website");
+  console.log("   - Setiap tombol download → 3x iklan PER TOMBOL");
+  console.log("💰 Script iklan Adsterra tetap berjalan!");
 </script>
 </body>
 </html>
