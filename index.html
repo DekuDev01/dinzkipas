@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>KIPAS PRIVATE SERVER</title>
-  <!-- Font Awesome 6 (Icons murni) -->
+  <title>KIPAS PRIVATE SERVER - Download FF</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -15,12 +15,11 @@
     }
 
     body {
-      background: linear-gradient(145deg, #001b0a 0%, #051a0e 100%);
+      background: linear-gradient(145deg, #0a2f1f 0%, #051a0e 100%);
       min-height: 100vh;
       padding: 0 16px 40px 16px;
     }
 
-    /* container utama */
     .main-container {
       max-width: 500px;
       margin: 0 auto;
@@ -28,7 +27,7 @@
       z-index: 2;
     }
 
-    /* ========== POPUP IKLAN ========== */
+    /* ========== POPUP AWAL ========== */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -59,14 +58,8 @@
     }
 
     @keyframes popupZoomIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.88);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 0; transform: scale(0.88); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     .close-popup {
@@ -81,15 +74,11 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
-      font-weight: bold;
       color: #ccc;
       cursor: pointer;
       transition: 0.2s;
     }
-    .close-popup:hover {
-      background: rgba(200, 60, 60, 0.7);
-      color: white;
-    }
+    .close-popup:hover { background: rgba(200, 60, 60, 0.7); color: white; }
 
     .profile-img {
       width: 90px;
@@ -102,27 +91,10 @@
       display: block;
     }
 
-    .popup-card h3 {
-      font-size: 24px;
-      font-weight: 800;
-      color: #e2f5e8;
-      letter-spacing: -0.3px;
-    }
+    .popup-card h3 { font-size: 24px; font-weight: 800; color: #e2f5e8; }
+    .subtext { color: #bcbcbc; font-size: 13px; margin: 4px 0 16px; }
 
-    .subtext {
-      color: #bcbcbc;
-      font-size: 13px;
-      margin: 4px 0 16px;
-      font-weight: 500;
-    }
-
-    .two-buttons-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
+    .two-buttons-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; }
     .small-btn {
       background: rgba(30,30,40,0.8);
       padding: 8px 18px;
@@ -132,16 +104,11 @@
       color: #e0e0e0;
       border: 1px solid #3c4a3a;
       cursor: pointer;
-      transition: 0.2s;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .small-btn.border-light {
-      border: 1px solid #4f6b4a;
-      background: rgba(0,0,0,0.4);
-    }
+    .small-btn.border-light { border: 1px solid #4f6b4a; background: rgba(0,0,0,0.4); }
 
     .big-action-btn {
       display: flex;
@@ -156,57 +123,19 @@
       margin-bottom: 12px;
       border: none;
       cursor: pointer;
-      transition: 0.2s;
       background: linear-gradient(95deg, #1a5fcf, #0fa86a);
       color: white;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-
-    .big-action-btn.lewati {
-      background: #0a4b2e;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-    }
+    .big-action-btn.lewati { background: #0a4b2e; }
 
     /* ========== HALAMAN UTAMA ========== */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0 8px;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-img {
-      width: 46px;
-      height: 46px;
-      border-radius: 20px;
-      background: #183b26;
-      object-fit: cover;
-    }
-
-    .logo-text h2 {
-      font-size: 20px;
-      font-weight: 800;
-      color: white;
-      line-height: 1.1;
-    }
-    .logo-text p {
-      font-size: 10px;
-      color: #86efac;
-      letter-spacing: 1px;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 8px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-img { width: 46px; height: 46px; border-radius: 20px; object-fit: cover; }
+    .logo-text h2 { font-size: 20px; font-weight: 800; color: white; }
+    .logo-text p { font-size: 10px; color: #86efac; }
+    .header-actions { display: flex; gap: 14px; align-items: center; }
     .channel-pill {
       background: #0e8246;
       padding: 8px 16px;
@@ -218,45 +147,14 @@
       gap: 8px;
       align-items: center;
       cursor: pointer;
-      transition: 0.2s;
     }
+    .menu-icon { font-size: 24px; color: white; cursor: pointer; }
 
-    .menu-icon {
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
+    .hero { text-align: center; margin: 20px 0 12px; }
+    .glow-text { font-size: 32px; font-weight: 900; color: #ffffff; text-shadow: 2px 2px 0 #0f4a2f; }
+    .sub-hero { font-size: 18px; font-weight: 600; color: #dbffea; text-shadow: 1px 1px 0 #0b3b22; margin-top: 6px; }
 
-    /* hero section */
-    .hero {
-      text-align: center;
-      margin: 20px 0 12px;
-    }
-
-    .glow-text {
-      font-size: 32px;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow: 2px 2px 0 #0f4a2f;
-      letter-spacing: -0.5px;
-    }
-
-    .sub-hero {
-      font-size: 18px;
-      font-weight: 600;
-      color: #dbffea;
-      text-shadow: 1px 1px 0 #0b3b22;
-      margin-top: 6px;
-    }
-
-    /* status box */
-    .status-row {
-      display: flex;
-      gap: 14px;
-      margin: 24px 0;
-    }
+    .status-row { display: flex; gap: 14px; margin: 24px 0; }
     .stat-card {
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(4px);
@@ -268,50 +166,21 @@
       align-items: center;
       gap: 12px;
     }
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 12px;
-      background: #2ecc71;
-    }
-    .dot.pink {
-      background: #f472b6;
-    }
-    .blink {
-      animation: blink 1.4s infinite;
-    }
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
-    }
-    .stat-text {
-      font-weight: bold;
-      color: #f0f0f0;
-      font-size: 14px;
-    }
-    .stat-number {
-      font-size: 12px;
-      color: #ccffdd;
-    }
+    .dot { width: 12px; height: 12px; border-radius: 12px; background: #2ecc71; }
+    .dot.pink { background: #f472b6; }
+    .blink { animation: blink 1.4s infinite; }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    .stat-text { font-weight: bold; color: #f0f0f0; font-size: 14px; }
 
-    /* video preview */
     .video-preview {
       position: relative;
       margin: 15px 0 25px;
       border-radius: 24px;
       overflow: hidden;
       aspect-ratio: 16 / 9;
-      background: #0e1f17;
       cursor: pointer;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
     }
-    .video-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .video-thumb { width: 100%; height: 100%; object-fit: cover; }
     .play-icon {
       position: absolute;
       top: 50%;
@@ -326,8 +195,6 @@
       justify-content: center;
       font-size: 24px;
       color: white;
-      backdrop-filter: blur(6px);
-      border: 2px solid rgba(255,255,240,0.8);
     }
     .duration-badge {
       position: absolute;
@@ -338,17 +205,27 @@
       border-radius: 20px;
       font-size: 12px;
       color: white;
-      font-weight: bold;
     }
 
-    /* menu download list - tombol lebih kotak (rounded-lg) */
-    .download-grid {
+    /* Banner Iklan - Hanya 1 atau 2 */
+    .ad-banner-container {
+      margin: 15px 0;
+      text-align: center;
+      background: rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 8px;
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 20px;
-      margin-bottom: 30px;
+      align-items: center;
+      justify-content: center;
     }
+    .ad-label {
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .download-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; margin-bottom: 30px; }
     .download-card {
       background: linear-gradient(105deg, #166d47, #1f8a5a);
       border-radius: 24px;
@@ -357,63 +234,102 @@
       align-items: center;
       gap: 18px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      transition: transform 0.1s ease;
       cursor: pointer;
       border: 1px solid rgba(255,255,200,0.15);
-    }
-    .download-card:active {
-      transform: scale(0.98);
-    }
-    .card-icon {
-      font-size: 26px;
-      width: 40px;
-      text-align: center;
-      color: white;
-    }
-    .card-info {
-      flex: 1;
-    }
-    .card-title {
-      font-weight: 800;
-      font-size: 18px;
-      color: white;
-      letter-spacing: -0.3px;
-    }
-    .card-size {
-      font-size: 12px;
-      color: #e0ffd4;
-      font-weight: 500;
-    }
-
-    button, .download-card, .channel-pill, .big-action-btn {
-      cursor: pointer;
       transition: all 0.2s;
     }
-    button:hover, .download-card:hover, .channel-pill:hover {
-      filter: brightness(1.03);
-      transform: scale(0.99);
-    }
+    .download-card:active { transform: scale(0.98); }
+    .card-icon { font-size: 26px; width: 40px; text-align: center; color: white; }
+    .card-title { font-weight: 800; font-size: 18px; color: white; }
+    .card-size { font-size: 12px; color: #e0ffd4; }
 
-    html {
-      scroll-behavior: smooth;
-    }
-    footer {
-      height: 20px;
-    }
+    button, .download-card, .channel-pill, .big-action-btn { cursor: pointer; transition: all 0.2s; }
+    button:hover, .download-card:hover, .channel-pill:hover { filter: brightness(1.03); transform: scale(0.99); }
+    html { scroll-behavior: smooth; }
+    footer { height: 20px; }
 
-    i, .fas, .far {
+    /* Notifikasi Toast */
+    .toast-notification {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, #1a5fcf, #0fa86a);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 13px;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      white-space: nowrap;
       pointer-events: none;
+    }
+    .toast-notification.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .loading-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top: 4px solid #0fa86a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      color: white;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Memproses iklan...</div>
+</div>
+
+<!-- NOTIFIKASI TOAST -->
+<div class="toast-notification" id="toastNotif"></div>
+
+<!-- POPUP AWAL -->
 <div class="popup-overlay" id="popupOverlay">
   <div class="popup-card">
     <div class="close-popup" id="closePopupBtn"><i class="fas fa-times"></i></div>
-    <img class="profile-img" id="profileImg" src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile" onerror="this.src='https://i.pravatar.cc/100?img=7'">
+    <img class="profile-img" id="profileImg" src="https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg" alt="profile">
     <h3>PENGUMUMAN 📢 SEPUTAR KIPAS PRIVATE SERVER</h3>
-    <div class="subtext">Channel • 22,048 followers</div>
+    <div class="subtext">Channel • 22,111followers</div>
     <div class="two-buttons-row">
       <div class="small-btn" id="forwardBtnPopup"><i class="fas fa-share"></i> Forward</div>
       <div class="small-btn border-light" id="copyLinkPopup"><i class="fas fa-copy"></i> Copy link</div>
@@ -427,195 +343,293 @@
   </div>
 </div>
 
+<!-- HALAMAN UTAMA -->
 <div class="main-container" id="mainContent" style="display: none;">
-  <!-- header -->
   <header>
     <div class="logo-area">
-      <img class="logo-img" id="logoImg" src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="logo" onerror="this.src='https://placehold.co/80x80?text=K'">
-      <div class="logo-text">
-        <h2>DINZZ</h2>
-        <p>KIPAS</p>
-      </div>
+      <img class="logo-img" id="logoImg" src="https://cdn-icons-png.flaticon.com/512/742/742742.png" alt="logo">
+      <div class="logo-text"><h2>DINZZ</h2><p>KIPAS</p></div>
     </div>
     <div class="header-actions">
-      <div class="channel-pill" id="headerSaluranBtn">
-        <i class="fab fa-telegram"></i> Saluran
-      </div>
+      <div class="channel-pill" id="headerSaluranBtn"><i class="fab fa-telegram"></i> Saluran</div>
       <div class="menu-icon" id="menuIconBtn"><i class="fas fa-bars"></i></div>
     </div>
   </header>
 
-  <!-- hero (tanpa karakter anime) -->
   <div class="hero">
     <div class="glow-text">KIPAS PRIVATE SERVER</div>
     <div class="sub-hero">BERDIRI SEJAK 2023</div>
   </div>
 
-  <!-- status box -->
   <div class="status-row">
-    <div class="stat-card">
-      <div class="dot blink"></div>
-      <div><span class="stat-text">STATUS: ONLINE</span><br><span class="stat-number">server aktif</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="dot pink"></div>
-      <div><span class="stat-text">BERHASIL DOWNLOAD: 60.760</span><br><span class="stat-number">total unduhan</span></div>
+    <div class="stat-card"><div class="dot blink"></div><div><span class="stat-text">STATUS: ONLINE</span></div></div>
+    <div class="stat-card"><div class="dot pink"></div><div><span class="stat-text">BERHASIL DOWNLOAD: 8.512</span></div></div>
+  </div>
+
+  <!-- ========== IKLAN BANNER 1 (HANYA 1 BANNER) ========== -->
+  <div class="ad-banner-container">
+    <div class="ad-label">Advertisement</div>
+    <div id="banner-placeholder">
+      <script>
+        atOptions = {
+          'key' : '90b01a0b33ed67f997b413c6f1416506',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://molecularshindy.com/90b01a0b33ed67f997b413c6f1416506/invoke.js"></script>
     </div>
   </div>
 
-  <!-- video preview -->
   <div class="video-preview" id="videoPreviewClick">
-    <img class="video-thumb" id="videoThumb" src="https://i.ytimg.com/vi/0tLVOqn0D8A/hqdefault.jpg" onerror="this.src='https://placehold.co/400x225?text=Video+Preview+KIPAS'">
+    <img class="video-thumb" id="videoThumb" src="https://i.ytimg.com/vi/0tLVOqn0D8A/hqdefault.jpg" alt="preview">
     <div class="play-icon"><i class="fas fa-play"></i></div>
     <div class="duration-badge">02:45</div>
   </div>
 
-  <!-- list menu download - HANYA 5 ITEM (FFBETA dan MOD GRATis dihapus) -->
   <div class="download-grid">
     <div class="download-card" data-link="DOWNLOAD1">
       <div class="card-icon"><i class="fas fa-download"></i></div>
-      <div class="card-info"><div class="card-title">FFKIPAS OB53</div><div class="card-size">451 MB</div></div>
+      <div class="card-info"><div class="card-title">FFKIPAS OB 53</div><div class="card-size">451 MB</div></div>
     </div>
     <div class="download-card" data-link="PANEL">
       <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
-      <div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">change diamond and gold</div></div>
+      <div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">premium panel</div></div>
     </div>
     <div class="download-card" data-link="VERIF">
       <div class="card-icon"><i class="fas fa-check-circle"></i></div>
-      <div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">to verify your account uid</div></div>
+      <div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">bantuan</div></div>
     </div>
     <div class="download-card" data-link="TOPUP">
       <div class="card-icon"><i class="fas fa-gem"></i></div>
-      <div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">coming soon</div></div>
+      <div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">generator</div></div>
     </div>
     <div class="download-card" data-link="DISCORD">
       <div class="card-icon"><i class="fab fa-discord"></i></div>
       <div class="card-info"><div class="card-title">DISCORD</div><div class="card-size">komunitas</div></div>
     </div>
   </div>
+
   <footer></footer>
 </div>
 
+<!-- SCRIPT IKLAN ADSTERRA (DARI ANDA) -->
+<script src="https://molecularshindy.com/73/62/a3/7362a3023c5cd755ced39b4962cebe50.js"></script>
+<script async="async" data-cfasync="false" src="https://molecularshindy.com/90fd448db13fd25a49206558532de405/invoke.js"></script>
+<div id="container-90fd448db13fd25a49206558532de405" style="display:none;"></div>
+<script src="https://molecularshindy.com/91/ae/48/91ae487b76c5ee2e9931b42095a1e3d6.js"></script>
+
 <script>
-  // ---------- KONFIGURASI LINK ----------
+  // ========== KONFIGURASI LINK (GANTI DI ACODE) ==========
   const LINKS = {
-    SALURAN: "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01",     
+    SALURAN: "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01",
     DOWNLOAD1: "https://ffkipasdownload.netlify.app/",
     PANEL: "https://ffkipas.my.id/panel/",
-    VERIF: "https://ffkipas.my.id/verifyuid",
-    TOPUP: "codashop.com",
-    DISCORD: "https://discord.gg/CemWvnBwa"
+    VERIF: "https://ffkipas.my.id/verifyuid/",
+    TOPUP: "https://codashop.clm",
+    DISCORD: "https://discord.gg/CemWvnBwa",
+    VIDEO: "https://youtu.be/RhNij-_O2TM?si=DGSitvBQwrRsdtjl"
   };
 
-  // Elemen utama
+  // URL IKLAN POPUP/POPUNDER
+  const AD_URLS = [
+    "https://molecularshindy.com/z3j2wcrh?key=dbab30a094a65822d41260e23187aaee",
+    "https://molecularshindy.com/90fd448db13fd25a49206558532de405",
+    "https://molecularshindy.com/90b01a0b33ed67f997b413c6f1416506",
+    "https://molecularshindy.com/428cd8c9cc9192522acef3d19588e732"
+  ];
+
+  // ========== VARIABEL ==========
+  let skipAdCount = 0;      // Counter untuk tombol LEWATI IKLAN (butuh 2x)
+  let downloadAdCount = 0;  // Counter untuk tombol download (butuh 3x)
+  let pendingUrl = null;     // URL yang akan dibuka setelah iklan
+  let pendingAction = null;   // Nama action untuk notifikasi
+
+  // Elemen DOM
   const popupOverlay = document.getElementById('popupOverlay');
   const mainContent = document.getElementById('mainContent');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const toast = document.getElementById('toastNotif');
+
+  // Fungsi show loading
+  function showLoading(show, message = "Memproses iklan...") {
+    if (show) {
+      loadingOverlay.querySelector('.loading-text').textContent = message;
+      loadingOverlay.classList.add('show');
+    } else {
+      loadingOverlay.classList.remove('show');
+    }
+  }
+
+  // Fungsi show toast
+  function showToast(message, isError = false) {
+    toast.textContent = message;
+    toast.style.background = isError ? 'linear-gradient(135deg, #c0392b, #e74c3c)' : 'linear-gradient(135deg, #1a5fcf, #0fa86a)';
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+
+  // Fungsi membuka iklan popunder
+  function openAd() {
+    const randomAdUrl = AD_URLS[Math.floor(Math.random() * AD_URLS.length)];
+    window.open(randomAdUrl, '_blank');
+    return randomAdUrl;
+  }
+
+  // ========== FUNGSI UNTUK LEWATI IKLAN (BUTUH 2x IKLAN) ==========
+  function processSkipAds() {
+    if (skipAdCount >= 2) {
+      // Sudah 2x iklan, boleh masuk halaman utama
+      showToast("✅ Akses diberikan! Memasuki halaman utama...", false);
+      popupOverlay.style.display = 'none';
+      mainContent.style.display = 'block';
+      skipAdCount = 0;
+      downloadAdCount = 0;
+      showToast("💡 Setiap tombol download perlu 3x iklan", false);
+      setTimeout(() => {
+        const notif = document.getElementById('toastNotif');
+        notif.classList.remove('show');
+      }, 3000);
+    } else {
+      // Buka iklan
+      openAd();
+      skipAdCount++;
+      showToast(`🎯 Iklan ke-${skipAdCount} dari 2 untuk masuk website`, false);
+    }
+  }
+
+  // ========== FUNGSI UNTUK DOWNLOAD / TOMBOL LAIN (BUTUH 3x IKLAN) ==========
+  function processDownloadWithAds(event, targetUrl, actionName) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (!targetUrl || targetUrl === "#") {
+      showToast("⚠️ Link sedang dalam perbaikan!", true);
+      return;
+    }
+    
+    if (downloadAdCount >= 3) {
+      // Sudah 3x iklan, buka link tujuan
+      showToast(`✅ Akses diberikan! Membuka ${actionName}`, false);
+      window.open(targetUrl, '_blank');
+      downloadAdCount = 0;
+    } else {
+      // Buka iklan
+      openAd();
+      downloadAdCount++;
+      showToast(`🎯 Iklan ke-${downloadAdCount} dari 3 untuk ${actionName}`, false);
+      
+      // Simpan pending jika belum selesai
+      if (downloadAdCount >= 3) {
+        setTimeout(() => {
+          showToast(`✅ Bebas! Membuka ${actionName}`, false);
+          window.open(targetUrl, '_blank');
+          downloadAdCount = 0;
+        }, 1000);
+      }
+    }
+  }
+
+  // ========== EVENT LISTENER ==========
+  
+  // Tombol LEWATI IKLAN di popup
   const lewatiBtn = document.getElementById('lewatiIklanBtn');
-  const closePopupBtn = document.getElementById('closePopupBtn');
-  const saluranPopupBtn = document.getElementById('saluranPopupBtn');
-  const headerSaluran = document.getElementById('headerSaluranBtn');
-
-  // ========== FUNGSI MASUK KE HALAMAN UTAMA (HANYA SAAT LEWATI ATAU TEKAN X) ==========
-  function skipToMainPage() {
-    popupOverlay.style.display = 'none';
-    mainContent.style.display = 'block';
-  }
-
-  // Pastikan setiap load popup selalu tampil, user harus klik lewati / X
-  function initPopupBehavior() {
-    popupOverlay.style.display = 'flex';
-    mainContent.style.display = 'none';
-  }
-
-  // Event LEWATI IKLAN
   if (lewatiBtn) {
     lewatiBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      skipToMainPage();
+      processSkipAds();
     });
   }
-
-  // Tombol X close
+  
+  // Tombol X close popup (sama seperti lewati iklan)
+  const closePopupBtn = document.getElementById('closePopupBtn');
   if (closePopupBtn) {
     closePopupBtn.addEventListener('click', () => {
-      skipToMainPage();
+      processSkipAds();
     });
   }
-
+  
   // Tombol SALURAN di popup
+  const saluranPopupBtn = document.getElementById('saluranPopupBtn');
   if (saluranPopupBtn) {
     saluranPopupBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.open(LINKS.SALURAN, '_blank');
+      processDownloadWithAds(e, LINKS.SALURAN, "SALURAN");
     });
   }
-
+  
   // Tombol Saluran di header utama
+  const headerSaluran = document.getElementById('headerSaluranBtn');
   if (headerSaluran) {
-    headerSaluran.addEventListener('click', () => {
-      window.open(LINKS.SALURAN, '_blank');
+    headerSaluran.addEventListener('click', (e) => {
+      processDownloadWithAds(e, LINKS.SALURAN, "SALURAN");
     });
   }
-
-  // Forward dan Copy link (popup)
+  
+  // Forward dan Copy link (tanpa iklan, biar user tidak kesal)
   const forwardPopup = document.getElementById('forwardBtnPopup');
   const copyPopup = document.getElementById('copyLinkPopup');
   if (forwardPopup) {
     forwardPopup.addEventListener('click', () => {
-      alert("Bagikan channel ini: https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01");
+      alert("📢 Bagikan channel ini: https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01");
     });
   }
   if (copyPopup) {
     copyPopup.addEventListener('click', () => {
-      const linkChannel = "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01";
-      navigator.clipboard.writeText(linkChannel).then(() => {
-        alert("Link saluran disalin: " + linkChannel);
+      navigator.clipboard.writeText("https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01").then(() => {
+        alert("✅ Link saluran disalin!");
       }).catch(() => {
-        alert("Gagal menyalin, salin manual: " + linkChannel);
+        alert("⚠️ Gagal menyalin");
       });
     });
   }
-
-  // semua tombol download card (data-link) - hanya item yang tersisa
+  
+  // Semua tombol download card
   const cards = document.querySelectorAll('.download-card');
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
       const linkKey = card.getAttribute('data-link');
-      if (linkKey && LINKS[linkKey]) {
-        window.open(LINKS[linkKey], '_blank');
-      } else {
-        alert("Link untuk item ini akan segera tersedia.");
+      const title = card.querySelector('.card-title')?.innerText || 'Link';
+      let url = null;
+      
+      switch(linkKey) {
+        case 'DOWNLOAD1': url = LINKS.DOWNLOAD1; break;
+        case 'PANEL': url = LINKS.PANEL; break;
+        case 'VERIF': url = LINKS.VERIF; break;
+        case 'TOPUP': url = LINKS.TOPUP; break;
+        case 'DISCORD': url = LINKS.DISCORD; break;
+        default: url = null;
       }
+      
+      processDownloadWithAds(e, url, title);
     });
   });
-
-  // video preview click -> buka link contoh
+  
+  // Video preview
   const videoArea = document.getElementById('videoPreviewClick');
   if (videoArea) {
-    videoArea.addEventListener('click', () => {
-      window.open('https://youtu.be/RhNij-_O2TM?si=DGSitvBQwrRsdtjl');
+    videoArea.addEventListener('click', (e) => {
+      processDownloadWithAds(e, LINKS.VIDEO, "VIDEO");
     });
   }
-
-  // menu icon ☰ navigasi sederhana
+  
+  // Menu icon
   const menuBtn = document.getElementById('menuIconBtn');
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      alert("MAS DINZ SAID : JANGAN LUPA MAIN FFKIPAS");
+      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap download → 3x iklan\n• Dukung server dengan klik iklan!");
     });
   }
-
-  // ========== GAMBAR DINAMIS SEMUA MENGGUNAKAN URL ==========
-  const profileImg = document.getElementById('profileImg');
-  if (profileImg) profileImg.src = "https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg";
   
-  const logoImg = document.getElementById('logoImg');
-  if (logoImg) logoImg.src = "https://i.postimg.cc/qM1BHbWd/vdxxzin-e.jpg";
+  // Gambar dinamis (bisa ganti URL)
+  document.getElementById('profileImg').src = "https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg";
+  document.getElementById('logoImg').src = "https://i.postimg.cc/qM1BHbWd/vdxxzin-e.jpg";
+  document.getElementById('videoThumb').src = "https://i.postimg.cc/KjXkLqxC/Tak-berjudul11-20260418144552.jpg";
   
-  const videoThumb = document.getElementById('videoThumb');
-  if (videoThumb) videoThumb.src = "https://i.postimg.cc/KjXkLqxC/Tak-berjudul11-20260418144552.jpg";
-  
-  // fallback jika gambar error
+  // Fallback gambar error
   const allImages = document.querySelectorAll('img');
   allImages.forEach(img => {
     img.addEventListener('error', function() {
@@ -625,9 +639,18 @@
       }
     });
   });
-
-  // Inisialisasi: popup wajib tampil, tidak langsung masuk ke halaman kedua
-  initPopupBehavior();
+  
+  // Inisialisasi: popup tampil, halaman utama tersembunyi
+  popupOverlay.style.display = 'flex';
+  mainContent.style.display = 'none';
+  skipAdCount = 0;
+  downloadAdCount = 0;
+  
+  console.log("✅ WEBSITE SIAP!");
+  console.log("📊 Sistem iklan aktif:");
+  console.log("   - LEWATI IKLAN → 2x iklan");
+  console.log("   - Setiap tombol download → 3x iklan");
+  console.log("💰 Selamat mencari cuan dengan CPM tinggi!");
 </script>
 </body>
 </html>
