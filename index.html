@@ -207,7 +207,7 @@
       color: white;
     }
 
-    /* Banner Iklan - Hanya 1 atau 2 */
+    /* Banner Iklan */
     .ad-banner-container {
       margin: 15px 0;
       text-align: center;
@@ -248,7 +248,6 @@
     html { scroll-behavior: smooth; }
     footer { height: 20px; }
 
-    /* Notifikasi Toast */
     .toast-notification {
       position: fixed;
       bottom: 30px;
@@ -272,7 +271,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Loading overlay */
     .loading-overlay {
       position: fixed;
       top: 0;
@@ -314,13 +312,11 @@
 </head>
 <body>
 
-<!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text">Memproses iklan...</div>
 </div>
 
-<!-- NOTIFIKASI TOAST -->
 <div class="toast-notification" id="toastNotif"></div>
 
 <!-- POPUP AWAL -->
@@ -329,7 +325,7 @@
     <div class="close-popup" id="closePopupBtn"><i class="fas fa-times"></i></div>
     <img class="profile-img" id="profileImg" src="https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg" alt="profile">
     <h3>PENGUMUMAN 📢 SEPUTAR KIPAS PRIVATE SERVER</h3>
-    <div class="subtext">Channel • 22,111followers</div>
+    <div class="subtext">Channel • 22,111 followers</div>
     <div class="two-buttons-row">
       <div class="small-btn" id="forwardBtnPopup"><i class="fas fa-share"></i> Forward</div>
       <div class="small-btn border-light" id="copyLinkPopup"><i class="fas fa-copy"></i> Copy link</div>
@@ -366,7 +362,7 @@
     <div class="stat-card"><div class="dot pink"></div><div><span class="stat-text">BERHASIL DOWNLOAD: 60.512</span></div></div>
   </div>
 
-  <!-- ========== IKLAN BANNER 1 ========== -->
+  <!-- IKLAN BANNER -->
   <div class="ad-banner-container">
     <div class="ad-label">Advertisement</div>
     <div id="banner-placeholder">
@@ -415,14 +411,14 @@
   <footer></footer>
 </div>
 
-<!-- SCRIPT IKLAN ADSTERRA -->
+<!-- SCRIPT IKLAN ADSTERRA (TIDAK DIHAPUS) -->
 <script src="https://molecularshindy.com/73/62/a3/7362a3023c5cd755ced39b4962cebe50.js"></script>
 <script async="async" data-cfasync="false" src="https://molecularshindy.com/90fd448db13fd25a49206558532de405/invoke.js"></script>
 <div id="container-90fd448db13fd25a49206558532de405" style="display:none;"></div>
 <script src="https://molecularshindy.com/91/ae/48/91ae487b76c5ee2e9931b42095a1e3d6.js"></script>
 
 <script>
-  // ========== KONFIGURASI LINK YANG DIMINTA ==========
+  // ========== KONFIGURASI LINK ==========
   const LINKS = {
     SALURAN: "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01",
     DOWNLOAD1: "https://ffkipasdownload.netlify.app/",
@@ -441,19 +437,18 @@
     "https://molecularshindy.com/428cd8c9cc9192522acef3d19588e732"
   ];
 
-  // ========== VARIABEL UNTUK SETIAP TOMBOL (PER-TOMBOL) ==========
-  // Menyimpan counter iklan untuk setiap aksi secara terpisah
+  // ========== VARIABEL COUNTER PER TOMBOL (BERDASARKAN data-link) ==========
   let adCounters = {
-    SALURAN: 0,
-    DOWNLOAD1: 0,
-    PANEL: 0,
-    VERIF: 0,
-    TOPUP: 0,
-    DISCORD: 0,
-    VIDEO: 0
+    'DOWNLOAD1': 0,
+    'PANEL': 0,
+    'VERIF': 0,
+    'TOPUP': 0,
+    'DISCORD': 0,
+    'SALURAN': 0,
+    'VIDEO': 0
   };
   
-  let skipAdCount = 0; // Untuk masuk ke halaman utama (2x iklan)
+  let skipAdCount = 0;
 
   // Elemen DOM
   const popupOverlay = document.getElementById('popupOverlay');
@@ -461,7 +456,6 @@
   const loadingOverlay = document.getElementById('loadingOverlay');
   const toast = document.getElementById('toastNotif');
 
-  // Fungsi show loading
   function showLoading(show, message = "Memproses iklan...") {
     if (show) {
       loadingOverlay.querySelector('.loading-text').textContent = message;
@@ -471,7 +465,6 @@
     }
   }
 
-  // Fungsi show toast
   function showToast(message, isError = false) {
     toast.textContent = message;
     toast.style.background = isError ? 'linear-gradient(135deg, #c0392b, #e74c3c)' : 'linear-gradient(135deg, #1a5fcf, #0fa86a)';
@@ -481,21 +474,19 @@
     }, 2500);
   }
 
-  // Fungsi membuka iklan popunder
   function openAd() {
     const randomAdUrl = AD_URLS[Math.floor(Math.random() * AD_URLS.length)];
     window.open(randomAdUrl, '_blank');
     return randomAdUrl;
   }
 
-  // ========== FUNGSI UNTUK LEWATI IKLAN MASUK WEBSITE (2x iklan) ==========
+  // ========== LEWATI IKLAN MASUK WEBSITE (2x iklan) ==========
   function processSkipAds() {
     if (skipAdCount >= 2) {
       showToast("✅ Akses diberikan! Memasuki halaman utama...", false);
       popupOverlay.style.display = 'none';
       mainContent.style.display = 'block';
       skipAdCount = 0;
-      // Reset semua counter per tombol saat masuk halaman utama
       for (let key in adCounters) {
         adCounters[key] = 0;
       }
@@ -507,68 +498,40 @@
     }
   }
 
-  // ========== FUNGSI UNTUK SETIAP TOMBOL (3x iklan PER TOMBOL) ==========
-  function processButtonClick(event, targetUrl, actionName) {
+  // ========== FUNGSI UTAMA UNTUK SEMUA TOMBOL (3x iklan PER TOMBOL) ==========
+  // Menggunakan identifier unik (data-link atau key) agar counter per tombol bekerja dengan benar
+  function processButtonWithAds(event, targetUrl, actionName, identifier) {
     event.preventDefault();
     event.stopPropagation();
     
-    // Cek apakah link valid (kecuali TOPUP yang sengaja "#")
-    if (actionName !== "FAKE TOP UP FF" && (!targetUrl || targetUrl === "#")) {
+    // Validasi link (kecuali TOPUP)
+    if (identifier !== 'TOPUP' && (!targetUrl || targetUrl === "#")) {
       showToast(`⚠️ Link untuk ${actionName} sedang dalam perbaikan!`, true);
       return;
     }
     
-    // Untuk TOPUP yang linknya "#", beri notifikasi khusus
-    if (actionName === "FAKE TOP UP FF" && targetUrl === "#") {
+    // Khusus TOPUP
+    if (identifier === 'TOPUP' && targetUrl === "#") {
       showToast(`⚠️ Fitur FAKE TOP UP sedang dalam pengembangan!`, true);
       return;
     }
     
-    let counter = adCounters[actionName.toUpperCase().replace(/ /g, '_')];
-    if (counter === undefined) {
-      // Fallback mapping
-      const mapping = {
-        'SALURAN': 'SALURAN',
-        'FFKIPAS OB 53': 'DOWNLOAD1',
-        'PANEL FFKIPAS': 'PANEL',
-        'VERIF MANUAL': 'VERIF',
-        'FAKE TOP UP FF': 'TOPUP',
-        'DISCORD': 'DISCORD',
-        'VIDEO': 'VIDEO'
-      };
-      const key = mapping[actionName] || actionName.toUpperCase().replace(/[^A-Z]/g, '_');
-      counter = adCounters[key] || 0;
-    }
+    // Ambil counter berdasarkan identifier
+    let currentCount = adCounters[identifier] || 0;
     
-    if (counter >= 3) {
-      // Sudah 3x iklan untuk tombol ini, buka link tujuan
+    if (currentCount >= 3) {
+      // Sudah 3x iklan, buka link TANPA iklan lagi
       showToast(`✅ Akses diberikan! Membuka ${actionName}`, false);
       window.open(targetUrl, '_blank');
-      // Reset counter tombol ini setelah berhasil (opsional)
-      const key = getCounterKey(actionName);
-      if (key) adCounters[key] = 0;
+      // Reset counter tombol ini
+      adCounters[identifier] = 0;
     } else {
-      // Buka iklan
+      // Belum 3x, buka iklan
       openAd();
-      const newCounter = counter + 1;
-      const key = getCounterKey(actionName);
-      if (key) adCounters[key] = newCounter;
-      showToast(`🎯 Iklan ke-${newCounter} dari 3 untuk ${actionName}`, false);
+      currentCount++;
+      adCounters[identifier] = currentCount;
+      showToast(`🎯 Iklan ke-${currentCount} dari 3 untuk ${actionName}`, false);
     }
-  }
-  
-  // Helper untuk mendapatkan kunci counter berdasarkan nama aksi
-  function getCounterKey(actionName) {
-    const mapping = {
-      'SALURAN': 'SALURAN',
-      'FFKIPAS OB 53': 'DOWNLOAD1',
-      'PANEL FFKIPAS': 'PANEL',
-      'VERIF MANUAL': 'VERIF',
-      'FAKE TOP UP FF': 'TOPUP',
-      'DISCORD': 'DISCORD',
-      'VIDEO': 'VIDEO'
-    };
-    return mapping[actionName];
   }
 
   // ========== EVENT LISTENER ==========
@@ -594,7 +557,7 @@
   const saluranPopupBtn = document.getElementById('saluranPopupBtn');
   if (saluranPopupBtn) {
     saluranPopupBtn.addEventListener('click', (e) => {
-      processButtonClick(e, LINKS.SALURAN, "SALURAN");
+      processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN");
     });
   }
   
@@ -602,7 +565,7 @@
   const headerSaluran = document.getElementById('headerSaluranBtn');
   if (headerSaluran) {
     headerSaluran.addEventListener('click', (e) => {
-      processButtonClick(e, LINKS.SALURAN, "SALURAN");
+      processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN");
     });
   }
   
@@ -628,7 +591,7 @@
   const cards = document.querySelectorAll('.download-card');
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
-      const linkKey = card.getAttribute('data-link');
+      const linkKey = card.getAttribute('data-link'); // DOWNLOAD1, PANEL, VERIF, TOPUP, DISCORD
       const title = card.querySelector('.card-title')?.innerText || 'Link';
       let url = null;
       
@@ -641,7 +604,8 @@
         default: url = null;
       }
       
-      processButtonClick(e, url, title);
+      // Panggil fungsi dengan identifier = linkKey (DOWNLOAD1, PANEL, dll)
+      processButtonWithAds(e, url, title, linkKey);
     });
   });
   
@@ -649,7 +613,7 @@
   const videoArea = document.getElementById('videoPreviewClick');
   if (videoArea) {
     videoArea.addEventListener('click', (e) => {
-      processButtonClick(e, LINKS.VIDEO, "VIDEO");
+      processButtonWithAds(e, LINKS.VIDEO, "VIDEO TUTORIAL", "VIDEO");
     });
   }
   
@@ -657,7 +621,7 @@
   const menuBtn = document.getElementById('menuIconBtn');
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap tombol → 3x iklan\n• kalo gamau bannyak iklan vip kocak!");
+      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap tombol → 3x iklan (per tombol)\n• Dukung server dengan klik iklan!");
     });
   }
   
@@ -685,10 +649,11 @@
     adCounters[key] = 0;
   }
   
-  console.log("✅ WEBSITE SIAP!");
+  console.log("✅ WEBSITE SIAP! Semua tombol berfungsi dengan benar.");
   console.log("📊 Sistem iklan aktif:");
   console.log("   - LEWATI IKLAN → 2x iklan untuk masuk website");
-  console.log("   - Setiap tombol download → 3x iklan PER TOMBOL");
+  console.log("   - Setiap tombol (FFKIPAS OB53, PANEL, VERIF, DLL) → 3x iklan PER TOMBOL");
+  console.log("   - Setelah 3x iklan, klik tombol sekali lagi akan langsung buka link tujuan");
   console.log("💰 Script iklan Adsterra tetap berjalan!");
 </script>
 </body>
