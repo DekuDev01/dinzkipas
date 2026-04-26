@@ -20,6 +20,120 @@
       padding: 0 16px 40px 16px;
     }
 
+    /* Anti-Adblock Overlay - Fullscreen Modern */
+    .anti-adblock-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 20, 10, 0.96);
+      backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.3s, opacity 0.3s ease;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .anti-adblock-overlay.active {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .anti-adblock-card {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      max-width: 380px;
+      width: 85%;
+      padding: 32px 24px 40px;
+      border-radius: 40px;
+      text-align: center;
+      border: 1px solid rgba(80, 200, 120, 0.6);
+      box-shadow: 0 30px 45px rgba(0, 0, 0, 0.5);
+      transform: scale(0.92);
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    }
+
+    .anti-adblock-overlay.active .anti-adblock-card {
+      transform: scale(1);
+    }
+
+    .adblock-icon {
+      font-size: 58px;
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.15);
+      width: 100px;
+      height: 100px;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .anti-adblock-card h2 {
+      color: #f5f5f5;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .anti-adblock-card p {
+      color: #c0e0c8;
+      font-size: 15px;
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+
+    .disable-adblock-btn {
+      background: linear-gradient(95deg, #1a7a4a, #0fa86a);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
+    .disable-adblock-btn:hover {
+      transform: scale(1.02);
+      background: linear-gradient(95deg, #1f8a55, #12c07a);
+    }
+
+    body.adblock-blocked {
+      overflow: hidden;
+    }
+
+    /* Elemen deteksi AdBlock (bait) */
+    .ad-detect-box {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .adsbox, .ads-banner, .adsbygoogle {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+    }
+
+    /* ========== SISA STYLE ASLI WEBSITE ========== */
     .main-container {
       max-width: 500px;
       margin: 0 auto;
@@ -217,7 +331,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
     }
     .ad-label {
       font-size: 9px;
@@ -243,6 +356,234 @@
     .card-icon { font-size: 26px; width: 40px; text-align: center; color: white; }
     .card-title { font-weight: 800; font-size: 18px; color: white; }
     .card-size { font-size: 12px; color: #e0ffd4; }
+
+    /* ========== NEWS & INFORMATION SECTION ========== */
+    .news-section {
+      margin: 40px 0 30px;
+    }
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+      border-left: 5px solid #0fa86a;
+      padding-left: 16px;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .news-card {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid rgba(80, 180, 100, 0.3);
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.4);
+      border-color: rgba(80, 180, 100, 0.6);
+    }
+    .news-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #1a3a2a;
+      display: block;
+    }
+    .news-content {
+      padding: 18px 18px 22px;
+    }
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .news-author {
+      color: #86efac;
+      font-weight: 600;
+      background: rgba(15, 168, 106, 0.2);
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-size: 11px;
+    }
+    .news-date {
+      color: #bcbcbc;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
+    .news-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #f2f9f0;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .news-excerpt {
+      font-size: 13px;
+      color: #d0e6d4;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+    .read-more-btn {
+      background: transparent;
+      border: 1px solid #0fa86a;
+      color: #bdf5cf;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .read-more-btn:hover {
+      background: #0fa86a;
+      color: white;
+      border-color: #0fa86a;
+    }
+
+    /* ========== MODAL DETAIL BERITA (REUSABLE) ========== */
+    .news-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2001;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.25s ease;
+    }
+    .news-modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .news-modal-container {
+      background: #0e2a1c;
+      width: 90%;
+      max-width: 550px;
+      max-height: 85vh;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+      transform: scale(0.92);
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(80, 180, 100, 0.5);
+      display: flex;
+      flex-direction: column;
+    }
+    .news-modal-overlay.active .news-modal-container {
+      transform: scale(1);
+    }
+    .modal-header {
+      position: relative;
+      background: #071a10;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(80, 180, 100, 0.3);
+    }
+    .modal-header h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #e2f5e8;
+      margin: 0;
+      padding-right: 30px;
+      line-height: 1.3;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: rgba(255,255,255,0.1);
+      width: 32px;
+      height: 32px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #ddd;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-close:hover {
+      background: rgba(200, 60, 60, 0.8);
+      color: white;
+    }
+    .modal-body {
+      padding: 20px 22px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-thumb {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-bottom: 18px;
+      background: #1a3a2a;
+      max-height: 220px;
+    }
+    .modal-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .modal-author {
+      background: rgba(15, 168, 106, 0.2);
+      padding: 5px 12px;
+      border-radius: 30px;
+      color: #86efac;
+      font-weight: 600;
+    }
+    .modal-date {
+      color: #bcbcbc;
+    }
+    .modal-full-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #e0f0e4;
+      margin-top: 12px;
+      text-align: justify;
+    }
+    .modal-body::-webkit-scrollbar {
+      width: 5px;
+    }
+    .modal-body::-webkit-scrollbar-track {
+      background: #1c3a2a;
+      border-radius: 10px;
+    }
+    .modal-body::-webkit-scrollbar-thumb {
+      background: #0fa86a;
+      border-radius: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .main-container { max-width: 800px; }
+      .news-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (min-width: 900px) {
+      .main-container { max-width: 1000px; }
+      .news-grid { grid-template-columns: repeat(3, 1fr); }
+    }
 
     button, .download-card, .channel-pill, .big-action-btn { cursor: pointer; transition: all 0.2s; }
     button:hover, .download-card:hover, .channel-pill:hover { filter: brightness(1.03); transform: scale(0.99); }
@@ -313,12 +654,47 @@
 </head>
 <body>
 
+<!-- ANTI-ADBLOCK OVERLAY -->
+<div class="anti-adblock-overlay" id="antiAdblockOverlay">
+  <div class="anti-adblock-card">
+    <div class="adblock-icon"><i class="fas fa-shield-alt"></i></div>
+    <h2>AdBlock Terdeteksi!</h2>
+    <p>Silakan matikan AdBlock / pemblokir iklan untuk mengakses website ini.</p>
+    <button class="disable-adblock-btn" id="disableAdblockBtn"><i class="fas fa-sync-alt"></i> Saya sudah mematikan AdBlock</button>
+  </div>
+</div>
+
+<!-- Bait element untuk deteksi adblock (tersembunyi) -->
+<div class="ad-detect-box">
+  <div class="adsbox" style="width:1px;height:1px;"></div>
+  <div class="ads-banner" style="width:1px;height:1px;"></div>
+  <div class="adsbygoogle" style="width:1px;height:1px;"></div>
+</div>
+
 <div class="loading-overlay" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text">Memproses iklan...</div>
 </div>
 
 <div class="toast-notification" id="toastNotif"></div>
+
+<!-- MODAL UNTUK DETAIL BERITA -->
+<div class="news-modal-overlay" id="newsModalOverlay">
+  <div class="news-modal-container">
+    <div class="modal-header">
+      <h3 id="modalTitle">Detail Berita</h3>
+      <div class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></div>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <img id="modalThumb" class="modal-thumb" src="" alt="thumbnail">
+      <div class="modal-meta">
+        <span class="modal-author" id="modalAuthor"></span>
+        <span class="modal-date" id="modalDate"></span>
+      </div>
+      <div class="modal-full-content" id="modalFullContent"></div>
+    </div>
+  </div>
+</div>
 
 <!-- POPUP AWAL -->
 <div class="popup-overlay" id="popupOverlay">
@@ -363,32 +739,19 @@
     <div class="stat-card"><div class="dot pink"></div><div><span class="stat-text">BERHASIL DOWNLOAD: 60.512</span></div></div>
   </div>
 
-  <!-- IKLAN BANNER (UPDATED SCRIPT) -->
   <div class="ad-banner-container">
     <div class="ad-label">Advertisement</div>
     <div id="banner-placeholder">
-      <!-- Iklan 1: 320x50 -->
       <script>
         atOptions = {
-          'key' : '762ce3ca2bba331332a1f902c71e93d0',
+          'key' : '90b01a0b33ed67f997b413c6f1416506',
           'format' : 'iframe',
           'height' : 50,
           'width' : 320,
           'params' : {}
         };
       </script>
-      <script src="https://molecularshindy.com/762ce3ca2bba331332a1f902c71e93d0/invoke.js"></script>
-      <!-- Iklan 2: 468x60 -->
-      <script>
-        atOptions = {
-          'key' : '8fff3b9f227159a62096072badbeb8b3',
-          'format' : 'iframe',
-          'height' : 60,
-          'width' : 468,
-          'params' : {}
-        };
-      </script>
-      <script src="https://molecularshindy.com/8fff3b9f227159a62096072badbeb8b3/invoke.js"></script>
+      <script src="https://molecularshindy.com/90b01a0b33ed67f997b413c6f1416506/invoke.js"></script>
     </div>
   </div>
 
@@ -399,42 +762,155 @@
   </div>
 
   <div class="download-grid">
-    <div class="download-card" data-link="DOWNLOAD1">
-      <div class="card-icon"><i class="fas fa-download"></i></div>
-      <div class="card-info"><div class="card-title">FFKIPAS OB53</div><div class="card-size">451 MB</div></div>
-    </div>
-    <div class="download-card" data-link="PANEL">
-      <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
-      <div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">change diamond and gold</div></div>
-    </div>
-    <div class="download-card" data-link="VERIF">
-      <div class="card-icon"><i class="fas fa-check-circle"></i></div>
-      <div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">verify your ffkipas account uid</div></div>
-    </div>
-    <div class="download-card" data-link="TOPUP">
-      <div class="card-icon"><i class="fas fa-gem"></i></div>
-      <div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">coming soon</div></div>
-    </div>
-    <div class="download-card" data-link="DISCORD">
-      <div class="card-icon"><i class="fab fa-discord"></i></div>
-      <div class="card-info"><div class="card-title">DISCORD</div><div class="card-size">komunitas</div></div>
-    </div>
+    <div class="download-card" data-link="DOWNLOAD1"><div class="card-icon"><i class="fas fa-download"></i></div><div class="card-info"><div class="card-title">FFKIPAS OB53</div><div class="card-size">451 MB</div></div></div>
+    <div class="download-card" data-link="PANEL"><div class="card-icon"><i class="fas fa-sliders-h"></i></div><div class="card-info"><div class="card-title">PANEL FFKIPAS</div><div class="card-size">change diamond and gold</div></div></div>
+    <div class="download-card" data-link="VERIF"><div class="card-icon"><i class="fas fa-check-circle"></i></div><div class="card-info"><div class="card-title">VERIF MANUAL</div><div class="card-size">verify your ffkipas account uid</div></div></div>
+    <div class="download-card" data-link="TOPUP"><div class="card-icon"><i class="fas fa-gem"></i></div><div class="card-info"><div class="card-title">FAKE TOP UP FF</div><div class="card-size">coming soon</div></div></div>
+    <div class="download-card" data-link="DISCORD"><div class="card-icon"><i class="fab fa-discord"></i></div><div class="card-info"><div class="card-title">DISCORD</div><div class="card-size">komunitas</div></div></div>
   </div>
 
+  <div class="news-section" id="newsSection">
+    <div class="section-title">News & Information</div>
+    <div class="news-grid" id="newsGridContainer"></div>
+  </div>
   <footer></footer>
 </div>
 
-<!-- SCRIPT IKLAN ADSTERRA YANG DIPERBARUI (SEMUA SCRIPT BARU DARI USER) -->
-<script src="https://molecularshindy.com/42/66/b2/4266b24c619458dbd4b2acca0dd27595.js"></script>
-<script async="async" data-cfasync="false" src="https://molecularshindy.com/72a806445a05a27342a76b9923590af4/invoke.js"></script>
-<div id="container-72a806445a05a27342a76b9923590af4"></div>
-<script src="https://molecularshindy.com/77/79/84/777984cf743868735382dbd5568601e7.js"></script>
+<script src="https://molecularshindy.com/73/62/a3/7362a3023c5cd755ced39b4962cebe50.js"></script>
+<script async="async" data-cfasync="false" src="https://molecularshindy.com/90fd448db13fd25a49206558532de405/invoke.js"></script>
+<div id="container-90fd448db13fd25a49206558532de405" style="display:none;"></div>
+<script src="https://molecularshindy.com/91/ae/48/91ae487b76c5ee2e9931b42095a1e3d6.js"></script>
 
 <script>
+  // ================== FITUR ANTI-ADBLOCK (PURE JS) ==================
+  (function() {
+    const adblockOverlay = document.getElementById('antiAdblockOverlay');
+    const disableBtn = document.getElementById('disableAdblockBtn');
+    let adBlockDetected = false;
+    let checkTimeout = null;
+
+    function detectAdBlock(callback) {
+      // Gunakan bait element: cek apakah elemen class adsbox disembunyikan oleh adblock
+      const bait = document.querySelector('.adsbox');
+      const bait2 = document.querySelector('.ads-banner');
+      let blocked = false;
+      if (bait) {
+        const styles = window.getComputedStyle(bait);
+        if (styles.display === 'none' || styles.visibility === 'hidden' || styles.height === '0px') {
+          blocked = true;
+        }
+      }
+      if (!blocked && bait2) {
+        const styles2 = window.getComputedStyle(bait2);
+        if (styles2.display === 'none' || styles2.visibility === 'hidden') blocked = true;
+      }
+      // fallback: cek juga apakah elemen dengan class adsbygoogle hilang
+      const bait3 = document.querySelector('.adsbygoogle');
+      if (!blocked && bait3 && window.getComputedStyle(bait3).display === 'none') blocked = true;
+      
+      callback(blocked);
+    }
+
+    function showAdblockPopup() {
+      if (!adblockOverlay) return;
+      adblockOverlay.classList.add('active');
+      document.body.classList.add('adblock-blocked');
+    }
+
+    function hideAdblockPopup() {
+      if (adblockOverlay) {
+        adblockOverlay.classList.remove('active');
+        document.body.classList.remove('adblock-blocked');
+      }
+    }
+
+    function recheckAndHide() {
+      detectAdBlock(function(isBlocked) {
+        if (!isBlocked) {
+          hideAdblockPopup();
+          adBlockDetected = false;
+        } else {
+          showAdblockPopup();
+          adBlockDetected = true;
+        }
+      });
+    }
+
+    // Event tombol "Saya sudah mematikan AdBlock"
+    if (disableBtn) {
+      disableBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        recheckAndHide();
+      });
+    }
+
+    // Delay 1.5 detik lalu cek adblock (agar tidak terlalu mengganggu)
+    setTimeout(function() {
+      detectAdBlock(function(isBlocked) {
+        if (isBlocked) {
+          adBlockDetected = true;
+          showAdblockPopup();
+        } else {
+          adBlockDetected = false;
+          hideAdblockPopup();
+        }
+      });
+    }, 1500);
+  })();
+
+  // ========== DATA BERITA (DENGAN FULL CONTENT) ==========
+  const newsData = [
+    {
+      id: 1,
+      thumbnail: "https://i.postimg.cc/gjhYYpWM/IMG-20260426-WA0019.jpg",
+      author: "MAS DINZZ",
+      date: "20/04/2026",
+      title: "Cara Damage di FFKIPAS ",
+      excerpt: "Masih ngerasa damage kecil? Musuh susah tumbang? 🤔 Tenang… ternyata caranya simpel banget dan sering diremehin!...",
+      fullContent: "Cara agar damage lebih sakit di FFKIPAS ternyata cukup sederhana dan sering diremehkan oleh pemain. Jika merasa damage kecil dan musuh sulit tumbang, solusinya adalah dengan mematikan atribut di pengaturan. Banyak yang tidak menyadari bahwa atribut yang aktif justru bisa membuat damage tidak maksimal. Setelah atribut dimatikan, damage akan terasa lebih besar, lebih mudah knock musuh, serta gameplay menjadi lebih ringan dan nyaman. Namun pastikan pengaturan dilakukan dengan benar agar tidak terjadi kesalahan yang justru membuat hasilnya terbalik.",
+    },
+    {
+      id: 2,
+      thumbnail: "https://i.postimg.cc/J4wrps3H/IMG-20260426-WA0022.jpg",
+      author: "King Deku",
+      date: "24/04/2026",
+      title: "Cara Menggunakan Skill HTTPS?",
+      excerpt: "Cara menggunakan skill HTTPS di FFKKPAS sebenarnya cukup mudah jika mengikuti langkah dengan benar...",
+      fullContent: "Cara menggunakan skill HTTPS di FFKIPAS sebenarnya cukup mudah jika mengikuti langkah dengan benar. Pertama siapkan 1 akun FF Original yang memiliki skill HTTPS, 1 akun FFKIPAS, dan fitur Dynamic Character. Login ke akun FF Original lalu cari akun FFKIPAS dan kirim permintaan pertemanan. Setelah itu logout dan login ke akun FFKIPAS melalui FF Original lalu terima permintaan pertemanan tadi. Selanjutnya logout kembali, login lagi ke akun utama yang memiliki skill HTTPS lalu undang akun FFKIPAS ke Dynamic Character. Terakhir logout lagi dan login ke akun FFKIPAS, sekarang akun tersebut sudah bisa menggunakan skill HTTPS."
+    },
+    {
+      id: 3,
+      thumbnail: "https://i.postimg.cc/g0Mcs4sC/IMG-20260426-WA0024.jpg",
+      author: "MAS DINZZ",
+      date: "23/04/2026",
+      title: "Cara mengatasi akun guest yang tidak di perbolehkan",
+      excerpt: "Pengumuman resmj FFKIPAS terkait kendala yang tajadi, saat ini akun guest tidak di perbolehkan...",
+      fullContent: "Pengumuman resmi FFKIPAS terkait kendala yang terjadi, saat ini akun guest tidak diperbolehkan digunakan langsung di FFKIPAS. Untuk tetap bisa bermain, pengguna diwajibkan membuat akun guest terlebih dahulu di FF Original atau KIPAS, kemudian login menggunakan akun tersebut hingga berhasil masuk ke dalam game. Setelah itu, pengguna dapat berpindah ke FFKIPAS dan melakukan login kembali menggunakan akun yang sudah dibuat. Pastikan seluruh langkah dilakukan dengan benar agar akun dapat digunakan tanpa kendala. Terima kasih atas perhatian dan kerja samanya."
+    },
+    {
+      id: 4,
+      thumbnail: "https://i.postimg.cc/5thSk5sJ/file-0000000040c472089a6b372e1651f2d9.png",
+      author: "BrayanMC",
+      date: "22/04/2026",
+      title: "Nama-Nama Reseller Resmi FFKIPAS ID",
+      excerpt: "FFKIPAS menghadirkan sistem reseller terpercaya yang berfokus pada penyediaan akses vip ke akun panel....",
+      fullContent: "FFKIPAS menghadirkan sistem reseller terpercaya yang berfokus pada penyediaan akses VIP ke panel, bukan penjualan akun seperti yang sering disalahpahami. Beberapa reseller yang dikenal aktif dan dipercaya antara lain Mas Dinzz, Dikaw, Muhlis, Ejoo, dan Mas Adenn, Danzz. Melalui reseller ini, pengguna bisa mendapatkan akses VIP FFKIPAS dengan performa lebih stabil, anti lag, serta unlock semua fitur yang tersedia di dalam panel. Layanan yang diberikan juga dikenal cepat dan responsif sehingga memudahkan pengguna dalam menikmati fitur premium tanpa kendala. Dengan adanya reseller resmi ini, pengalaman menggunakan FFKIPAS menjadi lebih maksimal, aman, dan nyaman bagi para pengguna."
+    },
+    {
+      id: 5,
+      thumbnail: "https://i.postimg.cc/gkSPfr8d/file-000000007e6071fa91d662ccfeaa14c9.png",
+      author: "King Deku",
+      date: "21/04/2026",
+      title: "Tips agar akun FFKIPAS tidak terkena BL(Blacklist)",
+      excerpt: "Untuk menjaga akun tetap aman dan tidak terkena blaclist(BL)...",
+      fullContent: "Untuk menjaga akun tetap aman dan tidak terkena blacklist (BL) di FFKIPAS, pemain perlu memahami penyebab utama dan cara menghindarinya. Bermain di mode BR (Battle Royale) dapat menyebabkan akun tereliminasi dan berisiko masuk blacklist. Oleh karena itu disarankan untuk hanya bermain di mode CR (Clash Squad) dan menghindari mode BR agar akun tetap aman. Jika ingin terhindar dari blacklist, cukup fokus bermain di mode CR saja. Aturan ini wajib dipahami dan dipatuhi karena jika diabaikan akan berisiko membuat akun terkena blacklist."
+    }
+  ];
+
   // ========== KONFIGURASI LINK ==========
   const LINKS = {
     SALURAN: "https://whatsapp.com/channel/0029Vb7ZdFyJP21620EI5B01",
-    DOWNLOAD1: "https://ffkipasdownload.my.id/",
+    DOWNLOAD1: "https://ffkipasdownload.netlify.app/",
     PANEL: "https://ffkipas.my.id/panel/",
     VERIF: "https://ffkipas.my.id/verifyuid",
     TOPUP: "#",
@@ -442,7 +918,6 @@
     VIDEO: "https://youtu.be/RhNij-_O2TM?si=DGSitvBQwrRsdtjl"
   };
 
-  // URL IKLAN POPUP/POPUNDER (tetap menggunakan URL dari konfigurasi sebelumnya, namun disarankan diperbarui jika ada dari user, tapi sesuai perintah hanya ganti script)
   const AD_URLS = [
     "https://molecularshindy.com/z3j2wcrh?key=dbab30a094a65822d41260e23187aaee",
     "https://molecularshindy.com/90fd448db13fd25a49206558532de405",
@@ -450,224 +925,92 @@
     "https://molecularshindy.com/428cd8c9cc9192522acef3d19588e732"
   ];
 
-  // ========== VARIABEL COUNTER PER TOMBOL (BERDASARKAN data-link) ==========
-  let adCounters = {
-    'DOWNLOAD1': 0,
-    'PANEL': 0,
-    'VERIF': 0,
-    'TOPUP': 0,
-    'DISCORD': 0,
-    'SALURAN': 0,
-    'VIDEO': 0
-  };
-  
+  let adCounters = { 'DOWNLOAD1':0, 'PANEL':0, 'VERIF':0, 'TOPUP':0, 'DISCORD':0, 'SALURAN':0, 'VIDEO':0 };
   let skipAdCount = 0;
 
-  // Elemen DOM
   const popupOverlay = document.getElementById('popupOverlay');
   const mainContent = document.getElementById('mainContent');
   const loadingOverlay = document.getElementById('loadingOverlay');
   const toast = document.getElementById('toastNotif');
 
-  function showLoading(show, message = "Memproses iklan...") {
-    if (show) {
-      loadingOverlay.querySelector('.loading-text').textContent = message;
-      loadingOverlay.classList.add('show');
-    } else {
-      loadingOverlay.classList.remove('show');
-    }
-  }
-
   function showToast(message, isError = false) {
     toast.textContent = message;
     toast.style.background = isError ? 'linear-gradient(135deg, #c0392b, #e74c3c)' : 'linear-gradient(135deg, #1a5fcf, #0fa86a)';
     toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2500);
+    setTimeout(() => toast.classList.remove('show'), 2500);
   }
 
-  function openAd() {
-    const randomAdUrl = AD_URLS[Math.floor(Math.random() * AD_URLS.length)];
-    window.open(randomAdUrl, '_blank');
-    return randomAdUrl;
-  }
-
-  // ========== LEWATI IKLAN MASUK WEBSITE (2x iklan) ==========
+  function openAd() { const randomAdUrl = AD_URLS[Math.floor(Math.random() * AD_URLS.length)]; window.open(randomAdUrl, '_blank'); }
   function processSkipAds() {
     if (skipAdCount >= 2) {
-      showToast("✅ Akses diberikan! Memasuki halaman utama...", false);
+      showToast("✅ Akses diberikan! Memasuki halaman utama...");
       popupOverlay.style.display = 'none';
       mainContent.style.display = 'block';
       skipAdCount = 0;
-      for (let key in adCounters) {
-        adCounters[key] = 0;
-      }
-      showToast("💡 Setiap tombol perlu 3x iklan", false);
-    } else {
-      openAd();
-      skipAdCount++;
-      showToast(`🎯 Iklan ke-${skipAdCount} dari 2 untuk masuk website`, false);
-    }
+      for (let key in adCounters) adCounters[key] = 0;
+      renderNewsSection();
+      showToast("💡 Setiap tombol perlu 3x iklan");
+    } else { openAd(); skipAdCount++; showToast(`🎯 Iklan ke-${skipAdCount} dari 2 untuk masuk website`); }
   }
-
-  // ========== FUNGSI UTAMA UNTUK SEMUA TOMBOL (3x iklan PER TOMBOL) ==========
-  // Menggunakan identifier unik (data-link atau key) agar counter per tombol bekerja dengan benar
   function processButtonWithAds(event, targetUrl, actionName, identifier) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    // Validasi link (kecuali TOPUP)
-    if (identifier !== 'TOPUP' && (!targetUrl || targetUrl === "#")) {
-      showToast(`⚠️ Link untuk ${actionName} sedang dalam perbaikan!`, true);
-      return;
-    }
-    
-    // Khusus TOPUP
-    if (identifier === 'TOPUP' && targetUrl === "#") {
-      showToast(`⚠️ Fitur FAKE TOP UP sedang dalam pengembangan!`, true);
-      return;
-    }
-    
-    // Ambil counter berdasarkan identifier
+    event.preventDefault(); event.stopPropagation();
+    if (identifier !== 'TOPUP' && (!targetUrl || targetUrl === "#")) { showToast(`⚠️ Link untuk ${actionName} sedang dalam perbaikan!`, true); return; }
+    if (identifier === 'TOPUP' && targetUrl === "#") { showToast(`⚠️ Fitur FAKE TOP UP sedang dalam pengembangan!`, true); return; }
     let currentCount = adCounters[identifier] || 0;
-    
-    if (currentCount >= 3) {
-      // Sudah 3x iklan, buka link TANPA iklan lagi
-      showToast(`✅ Akses diberikan! Membuka ${actionName}`, false);
-      window.open(targetUrl, '_blank');
-      // Reset counter tombol ini
-      adCounters[identifier] = 0;
-    } else {
-      // Belum 3x, buka iklan
-      openAd();
-      currentCount++;
-      adCounters[identifier] = currentCount;
-      showToast(`🎯 Iklan ke-${currentCount} dari 3 untuk ${actionName}`, false);
-    }
+    if (currentCount >= 3) { showToast(`✅ Akses diberikan! Membuka ${actionName}`); window.open(targetUrl, '_blank'); adCounters[identifier] = 0; }
+    else { openAd(); currentCount++; adCounters[identifier] = currentCount; showToast(`🎯 Iklan ke-${currentCount} dari 3 untuk ${actionName}`); }
   }
 
-  // ========== EVENT LISTENER ==========
-  
-  // Tombol LEWATI IKLAN di popup
-  const lewatiBtn = document.getElementById('lewatiIklanBtn');
-  if (lewatiBtn) {
-    lewatiBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      processSkipAds();
-    });
+  // Modal Logic
+  const modalOverlay = document.getElementById('newsModalOverlay');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalThumb = document.getElementById('modalThumb');
+  const modalAuthor = document.getElementById('modalAuthor');
+  const modalDate = document.getElementById('modalDate');
+  const modalFullContent = document.getElementById('modalFullContent');
+  function openNewsModal(newsItem) {
+    modalTitle.textContent = newsItem.title;
+    modalThumb.src = newsItem.thumbnail;
+    modalAuthor.innerHTML = `<i class="fas fa-user-pen" style="margin-right: 6px;"></i> ${escapeHtml(newsItem.author)}`;
+    modalDate.innerHTML = `<i class="far fa-calendar-alt" style="margin-right: 6px;"></i> ${escapeHtml(newsItem.date)}`;
+    modalFullContent.textContent = newsItem.fullContent;
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
-  
-  // Tombol X close popup
-  const closePopupBtn = document.getElementById('closePopupBtn');
-  if (closePopupBtn) {
-    closePopupBtn.addEventListener('click', () => {
-      processSkipAds();
+  function closeModal() { modalOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+  function renderNewsSection() {
+    const newsContainer = document.getElementById('newsGridContainer');
+    if (!newsContainer) return;
+    newsContainer.innerHTML = '';
+    newsData.forEach(item => {
+      const card = document.createElement('div'); card.className = 'news-card';
+      card.innerHTML = `<img class="news-thumb" src="${item.thumbnail}" alt="${item.title}" loading="lazy"><div class="news-content"><div class="news-meta"><span class="news-author"><i class="fas fa-user-pen" style="margin-right: 5px;"></i> ${escapeHtml(item.author)}</span><span class="news-date"><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> ${escapeHtml(item.date)}</span></div><div class="news-title">${escapeHtml(item.title)}</div><div class="news-excerpt">${escapeHtml(item.excerpt)}</div><button class="read-more-btn" data-id="${item.id}"><span>Read More</span> <i class="fas fa-arrow-right"></i></button></div></div>`;
+      newsContainer.appendChild(card);
     });
+    document.querySelectorAll('.read-more-btn').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const selectedNews = newsData.find(n => n.id == btn.getAttribute('data-id')); if(selectedNews) openNewsModal(selectedNews); }); });
   }
-  
-  // Tombol SALURAN di popup
-  const saluranPopupBtn = document.getElementById('saluranPopupBtn');
-  if (saluranPopupBtn) {
-    saluranPopupBtn.addEventListener('click', (e) => {
-      processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN");
-    });
-  }
-  
-  // Tombol Saluran di header utama
-  const headerSaluran = document.getElementById('headerSaluranBtn');
-  if (headerSaluran) {
-    headerSaluran.addEventListener('click', (e) => {
-      processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN");
-    });
-  }
-  
-  // Forward dan Copy link (tanpa iklan)
-  const forwardPopup = document.getElementById('forwardBtnPopup');
-  const copyPopup = document.getElementById('copyLinkPopup');
-  if (forwardPopup) {
-    forwardPopup.addEventListener('click', () => {
-      alert("📢 Bagikan channel ini: " + LINKS.SALURAN);
-    });
-  }
-  if (copyPopup) {
-    copyPopup.addEventListener('click', () => {
-      navigator.clipboard.writeText(LINKS.SALURAN).then(() => {
-        alert("✅ Link saluran disalin!");
-      }).catch(() => {
-        alert("⚠️ Gagal menyalin");
-      });
-    });
-  }
-  
-  // Semua tombol download card
-  const cards = document.querySelectorAll('.download-card');
-  cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const linkKey = card.getAttribute('data-link'); // DOWNLOAD1, PANEL, VERIF, TOPUP, DISCORD
-      const title = card.querySelector('.card-title')?.innerText || 'Link';
-      let url = null;
-      
-      switch(linkKey) {
-        case 'DOWNLOAD1': url = LINKS.DOWNLOAD1; break;
-        case 'PANEL': url = LINKS.PANEL; break;
-        case 'VERIF': url = LINKS.VERIF; break;
-        case 'TOPUP': url = LINKS.TOPUP; break;
-        case 'DISCORD': url = LINKS.DISCORD; break;
-        default: url = null;
-      }
-      
-      // Panggil fungsi dengan identifier = linkKey (DOWNLOAD1, PANEL, dll)
-      processButtonWithAds(e, url, title, linkKey);
-    });
-  });
-  
-  // Video preview
-  const videoArea = document.getElementById('videoPreviewClick');
-  if (videoArea) {
-    videoArea.addEventListener('click', (e) => {
-      processButtonWithAds(e, LINKS.VIDEO, "VIDEO TUTORIAL", "VIDEO");
-    });
-  }
-  
-  // Menu icon
-  const menuBtn = document.getElementById('menuIconBtn');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
-      alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x untuk masuk\n• Setiap tombol → 3x iklan\n• Dukung server dengan klik iklan!");
-    });
-  }
-  
-  // Gambar dinamis
+  function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+  document.getElementById('lewatiIklanBtn')?.addEventListener('click', (e) => { e.preventDefault(); processSkipAds(); });
+  document.getElementById('closePopupBtn')?.addEventListener('click', () => { processSkipAds(); });
+  document.getElementById('saluranPopupBtn')?.addEventListener('click', (e) => { processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN"); });
+  document.getElementById('headerSaluranBtn')?.addEventListener('click', (e) => { processButtonWithAds(e, LINKS.SALURAN, "SALURAN", "SALURAN"); });
+  document.getElementById('forwardBtnPopup')?.addEventListener('click', () => { alert("📢 Bagikan channel ini: " + LINKS.SALURAN); });
+  document.getElementById('copyLinkPopup')?.addEventListener('click', () => { navigator.clipboard.writeText(LINKS.SALURAN).then(() => alert("✅ Link saluran disalin!")); });
+  document.querySelectorAll('.download-card').forEach(card => { card.addEventListener('click', (e) => { const linkKey = card.getAttribute('data-link'); const title = card.querySelector('.card-title')?.innerText || 'Link'; let url = null; if(linkKey === 'DOWNLOAD1') url = LINKS.DOWNLOAD1; else if(linkKey === 'PANEL') url = LINKS.PANEL; else if(linkKey === 'VERIF') url = LINKS.VERIF; else if(linkKey === 'TOPUP') url = LINKS.TOPUP; else if(linkKey === 'DISCORD') url = LINKS.DISCORD; processButtonWithAds(e, url, title, linkKey); }); });
+  document.getElementById('videoPreviewClick')?.addEventListener('click', (e) => { processButtonWithAds(e, LINKS.VIDEO, "VIDEO TUTORIAL", "VIDEO"); });
+  document.getElementById('menuIconBtn')?.addEventListener('click', () => { alert("📱 MENU NAVIGASI\n\n▸ Beranda\n▸ Download List\n▸ Panel FF\n▸ Discord\n\n💡 TIPS:\n• Klik LEWATI IKLAN → 2x iklan untuk masuk\n• Setiap tombol → 3x iklan (per tombol)\n• Dukung server dengan klik iklan!"); });
   document.getElementById('profileImg').src = "https://i.postimg.cc/7hm4DhsV/Screenshot-2026-04-18-13-19-53-41.jpg";
   document.getElementById('logoImg').src = "https://i.postimg.cc/qM1BHbWd/vdxxzin-e.jpg";
-  document.getElementById('videoThumb').src = "https://i.postimg.cc/rFkPggYg/IMG-20260419-WA0166.jpg";
+  document.getElementById('videoThumb').src = "https://i.postimg.cc/KjXkLqxC/Tak-berjudul11-20260418144552.jpg";
   
-  // Fallback gambar error
-  const allImages = document.querySelectorAll('img');
-  allImages.forEach(img => {
-    img.addEventListener('error', function() {
-      if (!this.dataset.fallback) {
-        this.dataset.fallback = 'true';
-        this.src = 'https://placehold.co/200x200?text=KIPAS';
-      }
-    });
-  });
-  
-  // Inisialisasi
   popupOverlay.style.display = 'flex';
   mainContent.style.display = 'none';
   skipAdCount = 0;
-  for (let key in adCounters) {
-    adCounters[key] = 0;
-  }
-  
-  console.log("✅ WEBSITE SIAP! Semua tombol berfungsi dengan benar.");
-  console.log("📊 Sistem iklan aktif:");
-  console.log("   - LEWATI IKLAN → 2x iklan untuk masuk website");
-  console.log("   - Setiap tombol (FFKIPAS OB53, PANEL, VERIF, DLL) → 3x iklan PER TOMBOL");
-  console.log("   - Setelah 3x iklan, klik tombol sekali lagi akan langsung buka link tujuan");
-  console.log("💰 Script iklan Adsterra sudah diperbarui sesuai permintaan!");
+  for (let key in adCounters) adCounters[key] = 0;
 </script>
 </body>
 </html>
